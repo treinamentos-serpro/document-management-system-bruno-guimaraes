@@ -40,5 +40,26 @@ padrão, com nomes físicos aleatórios. Os metadados ficam em memória: reinici
 backend torna os arquivos anteriores inacessíveis pela API, sem removê-los do disco.
 Esta versão não tem autenticação e não deve ser exposta publicamente.
 
-&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+## Frontend
 
+Com o backend em execução na porta `3000`:
+
+```sh
+cd frontend
+npm install
+npm run dev
+```
+
+Acesse `http://localhost:5173` para enviar arquivos, listar seus metadados e
+baixar documentos com o nome original. A lista é carregada ao abrir a página e
+atualizada após cada upload; o botão **Atualizar lista** permite tentar novamente
+em caso de falha. Erros de upload, listagem e download são exibidos na interface.
+
+O cliente em `frontend/src/services/api.js` usa `fetch` com o prefixo `/api`.
+O proxy do Vite remove esse prefixo e encaminha as chamadas ao backend local.
+Execute `npm run build` para gerar a versão de produção; ao publicá-la, configure
+o servidor para encaminhar `/api` ao backend, removendo o prefixo, pois o proxy
+de desenvolvimento não faz parte dos arquivos gerados.
+Execute `npm test` em `frontend` para validar o cliente de API.
+
+&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
